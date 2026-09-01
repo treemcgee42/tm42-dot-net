@@ -1,0 +1,19 @@
+html {
+	font-family: serif;
+	line-height: 1.6;
+}
+
+body {
+	max-width: 40rem;
+	margin: 4rem auto;
+	padding: 0 1rem;
+}
+
+.stanza p {
+	margin: 0 0 1.5rem;
+}
+
+aside {
+	margin-top: 4rem;
+	font-size: 0.9rem;
+}
