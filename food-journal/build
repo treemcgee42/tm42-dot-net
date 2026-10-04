@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+
+import argparse
+import xml.etree.ElementTree as ET
+
+def top_boilerplate(title: str) -> str:
+	return f"""
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>
+{title}
+</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<article>
+"""
+
+def bottom_boilerplate() -> str:
+	return """
+</article>
+
+<footer>
+<address>
+Varun Malladi<br />
+<a href="http://www.tm42.net">tm42.net</a><br />
+<a href="mailto:varun.malladi@gmail.com">varun.malladi@gmail.com</a>
+</address>
+</footer>
+
+</body>
+
+</html>
+"""
+
+# --------------------------------------------------------------------------------------------------
+
+def parse_args():
+	parser = argparse.ArgumentParser()
+	
+	parser.add_argument("file", help="XML entry file")
+	
+	return parser.parse_args()
+
+def main():
+	args = parse_args()
+	root = ET.parse(args.file).getroot()
+	date = root.attrib["date"]
+	print(top_boilerplate(date))
+	for child in root:
+		print(ET.tostring(child, encoding="unicode", method="html"))
+	print(bottom_boilerplate())
+	
+if __name__ == "__main__":
+	main()
